@@ -3,191 +3,137 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <meta name="theme-color" content="#17222d">
-  <title>職場幽靈｜初始劇情呈現測試</title>
+  <meta name="theme-color" content="#172735">
+  <title>職場幽靈｜聚光 × 追跡測試</title>
   <style>
     :root{
       font-family:system-ui,-apple-system,"Noto Sans TC",sans-serif;
-      color:#20303c;background:#edf1f3;
-      --ink:#20303c;--muted:#6d7b86;--navy:#203749;--teal:#6fa9a0;
-      --amber:#d69c57;--paper:#fffdfa;--line:#dce3e7;--shadow:0 18px 48px #15202b1c;
+      color:#20313d;background:#172735;
+      --navy:#203a4d;--ink:#20313d;--muted:#687984;--paper:#fffdfa;
+      --amber:#d89a52;--teal:#78c9bc;--line:#dbe3e6;--shadow:0 18px 50px #14212b26;
     }
     *{box-sizing:border-box}
-    html{-webkit-text-size-adjust:100%;background:#17222d}
-    body{margin:0;min-height:100dvh;background:linear-gradient(180deg,#e9eef0,#f5f1e9 70%,#edf1f3);overflow-x:hidden}
-    button{font:inherit;touch-action:manipulation}
-    .hidden{display:none!important}
-    .shell{width:min(100%,760px);min-height:100dvh;margin:auto;background:#f6f7f6;box-shadow:0 0 70px #0f1a2233}
-    .topbar{position:sticky;top:0;z-index:30;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:max(12px,env(safe-area-inset-top)) 16px 12px;background:#172838f2;color:white;backdrop-filter:blur(12px)}
-    .brand{display:flex;align-items:center;gap:10px;min-width:0}.ghostmark{width:39px;height:39px;display:grid;place-items:center;border-radius:13px;background:#ffffff17;font-size:22px}.brand strong{display:block;font-size:16px}.brand small{display:block;margin-top:2px;color:#c7d2d9;font-size:11px}.version{flex:none;border:1px solid #ffffff2b;border-radius:999px;padding:5px 9px;color:#dbe4e9;font-size:10px}
-    main{padding:16px 14px calc(28px + env(safe-area-inset-bottom))}
-    .hero{padding:22px 4px 15px}.eyebrow{margin:0 0 8px;color:#8a673c;font-size:12px;font-weight:800;letter-spacing:.08em}.hero h1{margin:0;font-size:clamp(26px,8vw,38px);line-height:1.18;letter-spacing:-.03em}.hero p{margin:12px 0 0;color:#5d6c77;font-size:14px;line-height:1.8}
-    .story-seed{display:grid;grid-template-columns:auto 1fr;gap:12px;margin:12px 0 20px;padding:14px;border:1px solid #e1ddd3;border-radius:16px;background:#fffaf0}.seed-icon{width:42px;height:42px;display:grid;place-items:center;border-radius:13px;background:#f1e4c9;font-size:21px}.story-seed b{display:block;font-size:14px}.story-seed span{display:block;margin-top:5px;color:#6d716f;font-size:12px;line-height:1.6}
-    .mode-list{display:grid;gap:12px}.mode-card{position:relative;width:100%;display:grid;grid-template-columns:52px 1fr auto;gap:13px;align-items:center;padding:15px;text-align:left;border:1px solid #dce3e6;border-radius:18px;background:#fff;color:var(--ink);box-shadow:0 5px 18px #1c2b3510;cursor:pointer}.mode-card:active{transform:scale(.988)}.mode-icon{width:52px;height:52px;display:grid;place-items:center;border-radius:16px;font-size:25px}.mode-a .mode-icon{background:#e4eff0}.mode-b .mode-icon{background:#f7e8d4}.mode-c .mode-icon{background:#e8e3f1}.mode-card h2{margin:0;font-size:16px}.mode-card p{margin:5px 0 0;color:#697781;font-size:12px;line-height:1.55}.arrow{font-size:23px;color:#9da9b0}.done-tag{position:absolute;right:13px;top:10px;border-radius:999px;padding:3px 7px;background:#e6f1ed;color:#457b70;font-size:9px;font-weight:800}
-    .compare{margin-top:20px;padding:17px;border-radius:18px;background:#1d3345;color:white;box-shadow:var(--shadow)}.compare h2{margin:0;font-size:18px}.compare>p{margin:7px 0 15px;color:#c9d5dc;font-size:12px;line-height:1.6}.question{padding:13px 0;border-top:1px solid #ffffff1c}.question b{display:block;margin-bottom:9px;font-size:13px}.pickrow{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}.pickrow button{min-height:40px;border:1px solid #ffffff25;border-radius:10px;background:#ffffff0c;color:white;font-size:11px}.pickrow button.selected{border-color:#e9bb77;background:#d5964d;color:#192936;font-weight:800}.copy-result{width:100%;min-height:46px;margin-top:10px;border:0;border-radius:12px;background:#f4eee1;color:#263b49;font-weight:800}.copy-status{min-height:18px;margin-top:8px;text-align:center;color:#cbd6dc;font-size:11px}
-    .experience{min-height:calc(100dvh - 82px)}.experience-head{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:10px;margin-bottom:12px}.back{width:44px;height:44px;border:1px solid #dbe2e5;border-radius:13px;background:white;color:#334d5f;font-size:22px}.mode-name{text-align:center}.mode-name small{display:block;color:#8a673c;font-size:10px;font-weight:800}.mode-name strong{display:block;font-size:15px}.scene-count{min-width:45px;text-align:right;color:#70808a;font-size:11px}
-    .stage-card{position:relative;overflow:hidden;border-radius:22px;background:#e8e3d9;box-shadow:var(--shadow)}
-    .office{position:relative;height:min(58dvh,455px);min-height:390px;overflow:hidden;background-color:#ded8ca;background-image:linear-gradient(#c7c1b333 1px,transparent 1px),linear-gradient(90deg,#c7c1b333 1px,transparent 1px);background-size:27px 27px}
-    .office:before{content:"";position:absolute;left:5%;top:6%;width:34%;height:22%;border:3px solid #9aadb1;border-radius:12px;background:#cadbdd}.room-label{position:absolute;left:10%;top:14%;z-index:1;color:#62777a;font-size:11px;font-weight:800}.window{position:absolute;right:7%;top:7%;width:28%;height:15%;border:6px solid #7c8d92;border-radius:4px;background:linear-gradient(#9fc1cc,#dce7e7)}.desk{position:absolute;width:37%;height:18%;border:3px solid #9c825f;border-radius:10px;background:#d7b98d;box-shadow:3px 5px #7d684455}.desk:before{content:"💻";position:absolute;left:50%;top:12%;transform:translateX(-50%);font-size:29px}.desk-one{left:14%;top:57%}.desk-two{right:8%;top:57%}.desk-name{position:absolute;bottom:6px;left:0;right:0;text-align:center;color:#654f34;font-size:10px;font-weight:800}
-    .char{position:absolute;z-index:8;width:74px;text-align:center;transition:left .75s cubic-bezier(.2,.8,.25,1),top .75s cubic-bezier(.2,.8,.25,1),opacity .35s,transform .35s}.char .avatar{display:block;font-size:38px;filter:drop-shadow(0 3px 3px #0003)}.char .label{display:inline-block;margin-top:-2px;padding:3px 7px;border:1px solid #ced7da;border-radius:8px;background:white;font-size:11px;font-weight:800}.char.kin{left:24%;top:62%}.char.mei{left:78%;top:62%;opacity:0}.char.working .avatar{animation:work 1.3s ease-in-out infinite}.char.walking .avatar{animation:walk .38s ease-in-out infinite alternate}.char.unseen{opacity:0;pointer-events:none}
-    @keyframes work{50%{transform:translateY(2px) rotate(-2deg)}}@keyframes walk{to{transform:translateY(-4px)}}
-    .focus-mask{position:absolute;inset:0;z-index:12;pointer-events:none;background:radial-gradient(circle 105px at var(--fx,30%) var(--fy,67%),transparent 0 62%,#14212ad4 100%);transition:background .65s}.focus-ring{position:absolute;z-index:13;left:var(--fx,30%);top:var(--fy,67%);width:150px;height:150px;transform:translate(-50%,-50%);border:1px solid #e8c88f99;border-radius:50%;box-shadow:0 0 0 8px #f5d89d10;pointer-events:none;transition:left .65s,top .65s}
-    .prop{position:absolute;z-index:15;display:grid;place-items:center;transition:all .45s}.file-prop{left:39%;top:47%;font-size:27px;opacity:0}.message-prop{right:28%;top:38%;padding:7px 9px;border-radius:10px;background:white;color:#35505e;font-size:10px;font-weight:800;box-shadow:0 4px 12px #0002;opacity:0}.edit-prop{right:9%;top:39%;width:134px;padding:10px;border-radius:11px;background:#fffefb;color:#42525d;font-size:10px;line-height:1.55;box-shadow:0 5px 16px #0003;opacity:0}.strike{text-decoration:line-through;color:#a4aaad}.new-owner{color:#9b562e;font-weight:900}
-    .scene-caption{position:relative;z-index:20;min-height:151px;padding:17px 17px 14px;background:#fffdfa}.time{color:#a06d37;font-size:10px;font-weight:900;letter-spacing:.08em}.scene-caption h2{margin:5px 0 6px;font-size:19px}.scene-caption p{min-height:44px;margin:0;color:#50616d;font-size:14px;line-height:1.7}.continue{width:100%;min-height:47px;margin-top:10px;border:0;border-radius:13px;background:#29485d;color:white;font-weight:800}.continue:disabled{opacity:.45}.dots{display:flex;justify-content:center;gap:5px;margin-top:10px}.dots span{width:6px;height:6px;border-radius:50%;background:#d1d8db}.dots span.now{width:18px;border-radius:5px;background:#cc914f}
-    .office[data-scene="0"]{--fx:30%;--fy:68%}.office[data-scene="1"]{--fx:38%;--fy:49%}.office[data-scene="1"] .file-prop{opacity:1}.office[data-scene="2"]{--fx:53%;--fy:67%}.office[data-scene="2"] .mei{left:52%;top:61%;opacity:1}.office[data-scene="2"] .kin{left:30%;top:62%}.office[data-scene="2"] .message-prop{opacity:1}.office[data-scene="3"]{--fx:55%;--fy:47%}.office[data-scene="3"] .mei{left:70%;top:62%;opacity:1}.office[data-scene="3"] .file-prop{left:54%;top:46%;opacity:1}.office[data-scene="4"]{--fx:77%;--fy:53%}.office[data-scene="4"] .mei{left:72%;top:62%;opacity:1}.office[data-scene="4"] .edit-prop{opacity:1}
-    .comic-wrap{min-height:650px;background:#f4eee3;padding:13px}.comic-frame{position:relative;min-height:560px;overflow:hidden;border:4px solid #283945;border-radius:16px;background:#fffdf8;box-shadow:7px 8px 0 #283945}.comic-art{position:relative;height:378px;overflow:hidden;border-bottom:4px solid #283945;background:linear-gradient(180deg,#d7e2e3 0 34%,#d9ceb9 34%)}.comic-art .desk{top:56%;left:25%;width:48%}.comic-char{position:absolute;z-index:3;font-size:70px;filter:drop-shadow(0 4px 2px #0002)}.comic-char.kin{left:34%;top:38%}.comic-char.mei{right:10%;top:36%}.comic-object{position:absolute;z-index:4}.comic-clock{left:18px;top:18px;padding:7px 9px;border:3px solid #283945;background:white;font-size:13px;font-weight:900}.comic-sfx{right:16px;top:18px;color:#a05b36;font-size:24px;font-weight:1000;transform:rotate(-7deg)}.comic-bubble{position:absolute;z-index:5;max-width:180px;padding:11px;border:3px solid #283945;border-radius:18px;background:white;font-size:12px;font-weight:700;line-height:1.5}.comic-bubble:after{content:"";position:absolute;bottom:-13px;left:22px;border:7px solid transparent;border-top-color:#283945}.comic-sheet{left:50%;top:28%;transform:translateX(-50%);width:180px;padding:12px;border:3px solid #283945;background:#fff;font-size:11px;line-height:1.7}.panel-copy{padding:18px}.panel-copy .panel-no{color:#a36c37;font-size:10px;font-weight:900}.panel-copy h2{margin:5px 0 7px;font-size:20px}.panel-copy p{margin:0;color:#4e606c;font-size:14px;line-height:1.7}.comic-control{padding:13px 3px 2px}.comic-control button{width:100%;min-height:48px;border:0;border-radius:13px;background:#283945;color:white;font-weight:800}
-    .trace-wrap{min-height:640px;background:#142432;color:white}.trace-office{position:relative;height:455px;overflow:hidden;background-color:#34434a;background-image:linear-gradient(#ffffff0d 1px,transparent 1px),linear-gradient(90deg,#ffffff0d 1px,transparent 1px);background-size:27px 27px}.trace-office .desk{filter:saturate(.45) brightness(.78)}.ghost-haze{position:absolute;inset:0;background:radial-gradient(circle at 50% 50%,transparent,#09111888)}.ghost-title{position:absolute;z-index:4;left:16px;right:16px;top:16px;text-align:center}.ghost-title small{color:#a9c6cb;font-size:10px}.ghost-title h2{margin:5px 0;font-size:18px}.ghost-title p{margin:0;color:#bdcbd0;font-size:11px}.clue{position:absolute;z-index:7;width:64px;height:64px;border:1px solid #b8eee6;border-radius:50%;background:#9ef1df1a;color:white;box-shadow:0 0 0 8px #8ee4d813,0 0 24px #8ee4d85c;animation:pulse 1.6s ease-in-out infinite;cursor:pointer}.clue span{display:block;font-size:23px}.clue small{font-size:9px}.clue.found{border-color:#7b8b90;background:#ffffff0c;color:#85979d;box-shadow:none;animation:none}.clue-one{left:18%;top:58%}.clue-two{left:45%;top:32%}.clue-three{right:13%;top:56%}@keyframes pulse{50%{transform:scale(1.08);box-shadow:0 0 0 13px #8ee4d808,0 0 32px #8ee4d888}}
-    .trace-card{position:absolute;z-index:9;left:14px;right:14px;bottom:15px;min-height:100px;padding:14px;border:1px solid #ffffff27;border-radius:15px;background:#0f1c25e8;backdrop-filter:blur(7px)}.trace-card small{color:#91c3bd;font-size:10px;font-weight:900}.trace-card h3{margin:4px 0 5px;font-size:15px}.trace-card p{margin:0;color:#c5d1d5;font-size:12px;line-height:1.65}.trace-progress{display:flex;gap:6px;margin-top:10px}.trace-progress span{height:4px;flex:1;border-radius:4px;background:#ffffff20}.trace-progress span.on{background:#81cfc3}.reconstruct{width:100%;min-height:48px;border:0;background:#82c9be;color:#10232d;font-weight:900}.reconstruct:disabled{background:#536970;color:#a8b8bc}.replay{position:fixed;inset:0;z-index:80;display:grid;place-items:center;padding:18px;background:#0c171fd9;backdrop-filter:blur(7px)}.replay-card{width:min(100%,520px);max-height:82dvh;overflow:auto;padding:18px;border:1px solid #ffffff25;border-radius:18px;background:#1a2c37;color:white;box-shadow:0 20px 60px #0007}.replay-card h2{margin:0 0 14px;font-size:20px}.timeline{display:grid;gap:11px}.timeline-item{display:grid;grid-template-columns:47px 1fr;gap:10px}.timeline-item time{color:#d8aa70;font-size:10px;font-weight:900}.timeline-item p{margin:0;padding-bottom:11px;border-bottom:1px solid #ffffff18;color:#d4dde0;font-size:13px;line-height:1.65}.replay-card .impact{margin:15px 0;padding:13px;border-radius:13px;background:#f0dfc7;color:#253743;font-size:13px;line-height:1.7}.replay-card button{width:100%;min-height:47px;border:0;border-radius:12px;background:white;color:#243946;font-weight:900}
-    .mode-end{margin-top:13px;padding:20px;border-radius:19px;background:white;box-shadow:var(--shadow);text-align:center}.mode-end .end-icon{font-size:35px}.mode-end h2{margin:8px 0 6px;font-size:21px}.mode-end p{margin:0;color:#60717b;font-size:13px;line-height:1.7}.end-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:15px}.end-actions button{min-height:46px;border:1px solid #cfd9de;border-radius:12px;background:white;color:#29475a;font-weight:800}.end-actions .primary{border-color:#29475a;background:#29475a;color:white}
-    @media(max-width:430px){main{padding-left:10px;padding-right:10px}.office{min-height:365px}.scene-caption{min-height:155px}.comic-wrap{padding:9px}.comic-frame{min-height:545px}.comic-art{height:360px}.comic-char{font-size:62px}.trace-office{height:430px}}
+    html{-webkit-text-size-adjust:100%;background:#172735}
+    body{margin:0;min-height:100vh;min-height:100dvh;background:linear-gradient(180deg,#e8edef,#f4efe6 72%,#e8edef);overflow-x:hidden}
+    button{font:inherit;touch-action:manipulation}.hidden{display:none!important}
+    .app{width:min(100%,720px);min-height:100vh;min-height:100dvh;margin:auto;background:#f6f7f6;box-shadow:0 0 80px #0b151d55}
+    .topbar{position:sticky;top:0;z-index:50;display:flex;align-items:center;gap:10px;padding:max(11px,env(safe-area-inset-top)) 14px 11px;background:#172a39f3;color:white;backdrop-filter:blur(12px)}
+    .ghostmark{width:39px;height:39px;display:grid;place-items:center;border-radius:13px;background:#ffffff17;font-size:22px}.brand{min-width:0;flex:1}.brand strong{display:block;font-size:15px}.brand small{display:block;margin-top:2px;color:#c7d3da;font-size:10px}.version{border:1px solid #ffffff2b;border-radius:999px;padding:4px 8px;color:#dbe4e9;font-size:9px}.restart{border:0;background:transparent;color:#dce5ea;font-size:11px;padding:8px}
+    main{padding:15px 11px calc(28px + env(safe-area-inset-bottom))}
+    .intro{padding:22px 4px 10px}.eyebrow{margin:0 0 8px;color:#956c3e;font-size:11px;font-weight:900;letter-spacing:.1em}.intro h1{margin:0;font-size:clamp(29px,9vw,42px);line-height:1.13;letter-spacing:-.04em}.intro>p{margin:13px 0 0;color:#5e6f79;font-size:14px;line-height:1.8}
+    .loop-map{margin:18px 0 14px;padding:16px;border:1px solid #dfded8;border-radius:18px;background:#fffdf8;box-shadow:0 7px 25px #1b2b3510}.loop-step{display:grid;grid-template-columns:38px 1fr;gap:11px;position:relative}.loop-step:not(:last-child){padding-bottom:17px}.loop-step:not(:last-child):after{content:"";position:absolute;left:18px;top:37px;bottom:0;width:2px;background:#dce4e5}.loop-icon{position:relative;z-index:1;width:38px;height:38px;display:grid;place-items:center;border-radius:12px;background:#e4efef;font-size:18px}.loop-step:nth-child(2) .loop-icon{background:#e6e1f0}.loop-step:nth-child(3) .loop-icon{background:#f4e5d2}.loop-step b{display:block;font-size:13px}.loop-step span{display:block;margin-top:3px;color:#6b787e;font-size:11px;line-height:1.55}
+    .primary{width:100%;min-height:52px;border:0;border-radius:15px;background:#29495e;color:white;font-weight:900;box-shadow:0 8px 24px #29495e33}.intro-note{margin:10px 0 0;text-align:center;color:#839098;font-size:10px}
+    .play-head{display:grid;grid-template-columns:1fr auto;align-items:center;gap:12px;margin-bottom:10px}.phase small{display:block;color:#9b6e3c;font-size:9px;font-weight:900;letter-spacing:.09em}.phase strong{font-size:15px}.count{color:#73818a;font-size:11px}
+    .journey{display:flex;gap:5px;margin:0 2px 11px}.journey span{height:5px;flex:1;border-radius:4px;background:#d6dee1;transition:background .3s}.journey span.on{background:#d39a58}.journey span.ghost{background:#79c9bc}.journey span.return{background:#6d8ca0}
+    .stage{overflow:hidden;border-radius:22px;background:#ddd6c8;box-shadow:var(--shadow);transition:background .5s}
+    .office{position:relative;height:min(57dvh,440px);min-height:365px;overflow:hidden;background-color:#ded8ca;background-image:linear-gradient(#c7c1b32c 1px,transparent 1px),linear-gradient(90deg,#c7c1b32c 1px,transparent 1px);background-size:27px 27px;transition:filter .5s,background .5s}
+    .meeting{position:absolute;left:5%;top:6%;width:35%;height:22%;display:grid;place-items:center;border:3px solid #9aaeb2;border-radius:12px;background:#cbdcdf;color:#63787c;font-size:11px;font-weight:900}.window{position:absolute;right:7%;top:7%;width:27%;height:14%;border:6px solid #7f9095;border-radius:4px;background:linear-gradient(#a2c2cc,#dce7e7)}
+    .desk{position:absolute;top:58%;width:36%;height:18%;border:3px solid #9d835f;border-radius:10px;background:#d8ba8e;box-shadow:3px 5px #7d684455}.desk:before{content:"💻";position:absolute;left:50%;top:10%;transform:translateX(-50%);font-size:29px}.desk.one{left:10%}.desk.two{right:8%}.desk-name{position:absolute;left:0;right:0;bottom:5px;text-align:center;color:#654f34;font-size:10px;font-weight:900}
+    .char{position:absolute;z-index:8;width:73px;text-align:center;transition:left .75s cubic-bezier(.2,.8,.25,1),top .75s cubic-bezier(.2,.8,.25,1),opacity .4s}.char .avatar{display:block;font-size:38px;filter:drop-shadow(0 3px 3px #0003)}.char .name{display:inline-block;padding:3px 7px;border:1px solid #ced8dc;border-radius:8px;background:white;font-size:10px;font-weight:900}.kin{left:21%;top:62%}.mei{left:76%;top:62%;opacity:0}.char.work .avatar{animation:work 1.2s ease-in-out infinite}.char.walk .avatar{animation:walk .36s ease-in-out infinite alternate}@keyframes work{50%{transform:translateY(2px) rotate(-2deg)}}@keyframes walk{to{transform:translateY(-4px)}}
+    .spot-mask{position:absolute;inset:0;z-index:12;pointer-events:none;background:radial-gradient(circle 108px at var(--fx,29%) var(--fy,67%),transparent 0 62%,#14212ad8 100%);transition:background .65s}.spot-ring{position:absolute;z-index:13;left:var(--fx,29%);top:var(--fy,67%);width:154px;height:154px;transform:translate(-50%,-50%);border:1px solid #f1cf9699;border-radius:50%;box-shadow:0 0 0 8px #f5d89d10;pointer-events:none;transition:left .65s,top .65s}
+    .prop{position:absolute;z-index:15;pointer-events:none;opacity:0;transition:all .45s}.version-prop{left:36%;top:43%;font-size:28px}.request-prop{left:43%;top:37%;max-width:150px;padding:7px 9px;border-radius:10px;background:white;color:#35515f;font-size:10px;font-weight:900;box-shadow:0 4px 13px #0003}.file-prop{left:52%;top:45%;font-size:29px}.screen-flash{right:10%;top:38%;width:132px;padding:10px;border-radius:11px;background:#fffdf7;color:#42535d;font-size:10px;line-height:1.55;box-shadow:0 5px 16px #0003}.supervisor-msg{left:11%;right:11%;top:34%;padding:11px 13px;border:1px solid #c9d6dc;border-radius:12px;background:#ffffffed;color:#344d5c;font-size:11px;line-height:1.55;box-shadow:0 6px 20px #0003}.blurred{filter:blur(3px)}
+    .office[data-scene="0"]{--fx:28%;--fy:68%}.office[data-scene="1"]{--fx:38%;--fy:47%}.office[data-scene="1"] .version-prop{opacity:1}.office[data-scene="2"]{--fx:48%;--fy:67%}.office[data-scene="2"] .kin{left:26%}.office[data-scene="2"] .mei{left:51%;opacity:1}.office[data-scene="2"] .request-prop{opacity:1}.office[data-scene="3"]{--fx:54%;--fy:48%}.office[data-scene="3"] .mei{opacity:1}.office[data-scene="3"] .file-prop{opacity:1}.office[data-scene="4"]{--fx:76%;--fy:53%}.office[data-scene="4"] .mei{opacity:1}.office[data-scene="4"] .screen-flash{opacity:1}.office[data-scene="5"]{--fx:31%;--fy:54%}.office[data-scene="5"] .mei{left:18%;top:14%;opacity:1}.office[data-scene="5"] .supervisor-msg{opacity:1}
+    .caption{position:relative;z-index:25;min-height:164px;padding:16px;background:var(--paper)}.caption time{color:#a26d36;font-size:10px;font-weight:900;letter-spacing:.08em}.caption h2{margin:5px 0 6px;font-size:19px}.caption p{min-height:48px;margin:0;color:#50616c;font-size:14px;line-height:1.7}.next{width:100%;min-height:48px;margin-top:10px;border:0;border-radius:13px;background:#29495e;color:white;font-weight:900}
+    .trace-mode .office{filter:saturate(.45) brightness(.55);background-color:#526068}.trace-mode .spot-mask,.trace-mode .spot-ring{opacity:0}.trace-mode .char{opacity:.2!important}.trace-mode .prop{opacity:0!important}.ghost-haze{position:absolute;inset:0;z-index:16;pointer-events:none;background:radial-gradient(circle at 50% 50%,transparent,#071117aa);opacity:0;transition:opacity .5s}.trace-mode .ghost-haze{opacity:1}
+    .trace-ui{position:absolute;inset:0;z-index:20;color:white}.trace-title{position:absolute;left:14px;right:14px;top:14px;text-align:center}.trace-title small{color:#9ed3cc;font-size:9px;font-weight:900}.trace-title h2{margin:4px 0;font-size:17px}.trace-title p{margin:0;color:#c4d2d6;font-size:10px}.clue{position:absolute;width:66px;height:66px;border:1px solid #b9f2e9;border-radius:50%;background:#9ef1df1c;color:white;box-shadow:0 0 0 8px #8ee4d813,0 0 26px #8ee4d86b;animation:pulse 1.6s ease-in-out infinite;cursor:pointer}.clue span{display:block;font-size:23px}.clue small{font-size:9px}.clue.found{border-color:#758990;background:#ffffff0c;color:#819399;box-shadow:none;animation:none}.clue.version{left:15%;top:58%}.clue.message{left:43%;top:34%}.clue.credit{right:12%;top:58%}@keyframes pulse{50%{transform:scale(1.08);box-shadow:0 0 0 13px #8ee4d808,0 0 34px #8ee4d888}}
+    .trace-detail{position:absolute;left:13px;right:13px;bottom:13px;min-height:111px;padding:13px;border:1px solid #ffffff25;border-radius:15px;background:#0e1b24ec;backdrop-filter:blur(8px)}.trace-detail small{color:#8fc9c0;font-size:9px;font-weight:900}.trace-detail h3{margin:4px 0;font-size:14px}.trace-detail p{margin:0;color:#cad6da;font-size:11px;line-height:1.6}.trace-bars{display:flex;gap:5px;margin-top:9px}.trace-bars span{height:4px;flex:1;border-radius:4px;background:#ffffff1f}.trace-bars span.on{background:#78c9bc}.rebuild{width:100%;min-height:50px;border:0;background:#7fcbbf;color:#142832;font-weight:900}.rebuild:disabled{background:#536970;color:#a8b8bc}
+    .reconstruction{position:fixed;inset:0;z-index:90;display:grid;place-items:center;padding:16px;background:#081219e8;backdrop-filter:blur(8px)}.recon-card{width:min(100%,520px);max-height:84dvh;overflow:auto;padding:18px;border:1px solid #ffffff25;border-radius:19px;background:#192d38;color:white;box-shadow:0 22px 65px #0008}.recon-card>small{color:#86cfc4;font-size:9px;font-weight:900}.recon-card h2{margin:5px 0 15px;font-size:20px}.timeline{display:grid;gap:11px}.event{display:grid;grid-template-columns:48px 1fr;gap:10px}.event time{color:#dfad70;font-size:9px;font-weight:900}.event p{margin:0;padding-bottom:11px;border-bottom:1px solid #ffffff17;color:#d4dde0;font-size:12px;line-height:1.65}.recon-impact{margin:15px 0;padding:13px;border-radius:13px;background:#efdfc8;color:#253843;font-size:13px;line-height:1.7}.return-btn{width:100%;min-height:49px;border:0;border-radius:13px;background:white;color:#263e4d;font-weight:900}
+    .end{padding:10px 0 0}.end-card{padding:20px;border-radius:20px;background:white;box-shadow:var(--shadow)}.end-kicker{color:#986a39;font-size:10px;font-weight:900}.end-card h1{margin:6px 0 8px;font-size:24px}.end-card>p{margin:0;color:#60717b;font-size:13px;line-height:1.7}.question{padding:15px 0;border-top:1px solid #e4eaec}.question:first-of-type{margin-top:16px}.question b{display:block;margin-bottom:9px;font-size:13px}.choices{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}.choices button{min-height:42px;border:1px solid #ced9de;border-radius:11px;background:white;color:#3d5665;font-size:11px}.choices button.selected{border-color:#29495e;background:#29495e;color:white;font-weight:900}.copy{width:100%;min-height:48px;margin-top:8px;border:0;border-radius:13px;background:#e8dfd0;color:#2b4250;font-weight:900}.copy-status{min-height:20px;margin-top:8px;text-align:center;color:#6b7c85;font-size:10px}.again{width:100%;margin-top:4px;border:0;background:transparent;color:#6d7d86;font-size:11px;padding:10px}
+    @media(max-width:420px){.office{min-height:350px}.caption{min-height:170px}.char{width:65px}.char .avatar{font-size:34px}.clue{width:61px;height:61px}.trace-detail{min-height:106px}.intro h1{font-size:31px}}
     @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.001ms!important;transition-duration:.001ms!important}}
   </style>
 </head>
 <body>
-  <div class="shell">
-    <header class="topbar">
-      <div class="brand"><span class="ghostmark">👻</span><div><strong>職場幽靈</strong><small>初始劇情呈現測試</small></div></div>
-      <span class="version">v0.4</span>
-    </header>
-
+  <div class="app">
+    <header class="topbar"><span class="ghostmark">👻</span><div class="brand"><strong>職場幽靈</strong><small>聚光演出 × 幽靈追跡</small></div><button class="restart hidden" id="restart">重新開始</button><span class="version">v0.5</span></header>
     <main>
-      <section id="menu">
-        <div class="hero">
-          <p class="eyebrow">同一段故事，三種觀看方式</p>
-          <h1>先看見一個人，<br>再看見關係變質。</h1>
-          <p>這次不要求你同時追蹤四個角色。每種模式都從小勤獨自工作開始，美玲之後才加入。</p>
+      <section id="intro">
+        <div class="intro"><p class="eyebrow">本次只測試一條體驗循環</p><h1>先看見不對勁，<br>再親自追查。</h1><p>角色仍然自主工作。你先被聚光引導看見重要行動；當異常留下痕跡，職場幽靈才會介入。</p></div>
+        <div class="loop-map">
+          <div class="loop-step"><span class="loop-icon">🎥</span><div><b>聚光觀察</b><span>先認識小勤，再看見美玲進入她的工作。</span></div></div>
+          <div class="loop-step"><span class="loop-icon">👻</span><div><b>幽靈追跡</b><span>可疑行為發生後，碰觸三個殘留痕跡。</span></div></div>
+          <div class="loop-step"><span class="loop-icon">↩</span><div><b>返回辦公室</b><span>帶著已知的真相，觀看事情造成的後果。</span></div></div>
         </div>
-        <div class="story-seed"><span class="seed-icon">📄</span><div><b>本次共同劇情</b><span>小勤修正了一份有問題的資料；隔天，美玲來索取摘要。兩人做過的事沒有改變，只有成果上被看見的名字變了。</span></div></div>
-        <div class="mode-list">
-          <button class="mode-card mode-a" data-mode="spotlight"><span class="mode-icon">🎥</span><span><h2>A．聚光演出</h2><p>辦公室仍在運作，但鏡頭只讓你看見此刻重要的人與動作。</p></span><span class="arrow">›</span></button>
-          <button class="mode-card mode-b" data-mode="comic"><span class="mode-icon">▣</span><span><h2>B．互動分鏡</h2><p>像翻閱短篇漫畫，一格一格看清楚行為與表情轉折。</p></span><span class="arrow">›</span></button>
-          <button class="mode-card mode-c" data-mode="trace"><span class="mode-icon">🔍</span><span><h2>C．幽靈追跡</h2><p>事情已經發生。親自碰觸殘留在辦公室裡的三個線索。</p></span><span class="arrow">›</span></button>
-        </div>
-
-        <section class="compare hidden" id="compare">
-          <h2>比較你的感受</h2><p>至少體驗兩種方式後再選。結果只保存在這支手機，可複製回來告訴我。</p>
-          <div class="question" data-question="clarity"><b>哪一種最容易抓到故事重點？</b><div class="pickrow"><button data-value="A">A 聚光</button><button data-value="B">B 分鏡</button><button data-value="C">C 追跡</button></div></div>
-          <div class="question" data-question="emotion"><b>哪一種最容易產生情緒？</b><div class="pickrow"><button data-value="A">A 聚光</button><button data-value="B">B 分鏡</button><button data-value="C">C 追跡</button></div></div>
-          <div class="question" data-question="identity"><b>哪一種最像「職場幽靈」的體驗？</b><div class="pickrow"><button data-value="A">A 聚光</button><button data-value="B">B 分鏡</button><button data-value="C">C 追跡</button></div></div>
-          <button class="copy-result" id="copyResult">複製測試結果</button><div class="copy-status" id="copyStatus"></div>
-        </section>
+        <button class="primary" id="start">開始觀察</button><p class="intro-note">約 2 分鐘｜兩名角色｜不需要預先閱讀規則</p>
       </section>
 
-      <section class="experience hidden" id="experience">
-        <div class="experience-head"><button class="back" id="back" aria-label="回到模式選擇">‹</button><div class="mode-name"><small id="modeCode"></small><strong id="modeTitle"></strong></div><span class="scene-count" id="sceneCount"></span></div>
-
-        <section id="spotlightMode" class="hidden">
-          <div class="stage-card">
-            <div class="office" id="spotOffice" data-scene="0">
-              <div class="room-label">📋 小會議室</div><div class="window"></div>
-              <div class="desk desk-one"><span class="desk-name">小勤</span></div><div class="desk desk-two"><span class="desk-name">美玲</span></div>
-              <div class="char kin working"><span class="avatar">👩🏻‍💻</span><span class="label">小勤</span></div>
-              <div class="char mei unseen"><span class="avatar">👩🏻‍💼</span><span class="label">美玲</span></div>
-              <div class="prop file-prop">📄</div><div class="prop message-prop">💬 傳我摘要，我幫你說明</div>
-              <div class="prop edit-prop"><span class="strike">資料修正：小勤</span><br><span class="new-owner">提案主責：美玲</span></div>
-              <div class="focus-mask"></div><div class="focus-ring"></div>
-            </div>
-            <div class="scene-caption" aria-live="polite"><span class="time" id="spotTime"></span><h2 id="spotHeading"></h2><p id="spotText"></p><button class="continue" id="spotNext">繼續觀察</button><div class="dots" id="spotDots"></div></div>
+      <section id="play" class="hidden">
+        <div class="play-head"><div class="phase"><small id="phaseCode">第一階段</small><strong id="phaseTitle">聚光觀察</strong></div><span class="count" id="count">1 / 6</span></div>
+        <div class="journey" id="journey"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+        <div class="stage" id="stage">
+          <div class="office" id="office" data-scene="0">
+            <div class="meeting">📋 小會議室</div><div class="window"></div>
+            <div class="desk one"><span class="desk-name">小勤</span></div><div class="desk two"><span class="desk-name">美玲</span></div>
+            <div class="char kin work"><span class="avatar">👩🏻‍💻</span><span class="name">小勤</span></div>
+            <div class="char mei"><span class="avatar">👩🏻‍💼</span><span class="name">美玲</span></div>
+            <div class="prop version-prop" aria-hidden="true">💾</div><div class="prop request-prop" aria-hidden="true">💬 傳我摘要，我幫你說明</div><div class="prop file-prop" aria-hidden="true">📄</div>
+            <div class="prop screen-flash" aria-hidden="true"><span class="blurred">資料修正：小勤</span><br>主責欄位正在編輯…</div>
+            <div class="prop supervisor-msg" aria-hidden="true">📩 主管：明早由美玲代表說明，小勤協助補齊資料。</div>
+            <div class="spot-mask"></div><div class="spot-ring"></div><div class="ghost-haze"></div>
+            <section class="trace-ui hidden" id="traceUI">
+              <div class="trace-title"><small>幽靈感應已開啟</small><h2>異常留下了三個痕跡</h2><p>碰觸發光處，找到的順序由你決定。</p></div>
+              <button class="clue version" data-clue="version"><span>💾</span><small>版本</small></button>
+              <button class="clue message" data-clue="message"><span>💬</span><small>訊息</small></button>
+              <button class="clue credit" data-clue="credit"><span>📄</span><small>封面</small></button>
+              <div class="trace-detail" aria-live="polite"><small id="traceKicker">尚未讀取</small><h3 id="traceHeading">哪個痕跡最先吸引你？</h3><p id="traceText">幽靈只能看見工作留下的殘影，不能改動角色的行為。</p><div class="trace-bars"><span></span><span></span><span></span></div></div>
+            </section>
           </div>
-        </section>
+          <section class="caption" id="caption" aria-live="polite"><time id="sceneTime"></time><h2 id="sceneHeading"></h2><p id="sceneText"></p><button class="next" id="next">繼續觀察</button></section>
+          <button class="rebuild hidden" id="rebuild" disabled>集齊三個痕跡後重組事件</button>
+        </div>
+      </section>
 
-        <section id="comicMode" class="hidden">
-          <div class="comic-wrap">
-            <div class="comic-frame">
-              <div class="comic-art" id="comicArt"></div>
-              <div class="panel-copy"><span class="panel-no" id="panelNo"></span><h2 id="panelHeading"></h2><p id="panelText"></p></div>
-            </div>
-            <div class="comic-control"><button id="comicNext">翻到下一格</button></div>
-          </div>
-        </section>
-
-        <section id="traceMode" class="hidden">
-          <div class="trace-wrap">
-            <div class="trace-office">
-              <div class="desk desk-one"><span class="desk-name">小勤</span></div><div class="desk desk-two"><span class="desk-name">美玲</span></div><div class="ghost-haze"></div>
-              <div class="ghost-title"><small>幽靈感應已開啟</small><h2>找出三個殘留的工作痕跡</h2><p>發光處可以觸碰；找到的順序由你決定。</p></div>
-              <button class="clue clue-one" data-clue="version"><span>💾</span><small>版本</small></button>
-              <button class="clue clue-two" data-clue="message"><span>💬</span><small>訊息</small></button>
-              <button class="clue clue-three" data-clue="credit"><span>📄</span><small>封面</small></button>
-              <div class="trace-card" aria-live="polite"><small id="traceKicker">尚未讀取</small><h3 id="traceHeading">哪一個痕跡最先吸引你？</h3><p id="traceText">點擊任一發光物件，幽靈會看見它留下的片段。</p><div class="trace-progress" id="traceProgress"><span></span><span></span><span></span></div></div>
-            </div>
-            <button class="reconstruct" id="reconstruct" disabled>集齊三個痕跡後重組事件</button>
-          </div>
-        </section>
-
-        <section class="mode-end hidden" id="modeEnd"><div class="end-icon" id="endIcon">◉</div><h2 id="endTitle"></h2><p id="endText"></p><div class="end-actions"><button id="replayMode">再看一次</button><button class="primary" id="chooseAnother">試另一種方式</button></div></section>
+      <section id="end" class="end hidden">
+        <div class="end-card"><span class="end-kicker">v0.5 體驗完成</span><h1>這次的重點是「切換」</h1><p>請依照剛才的直覺回答。結果只保存在這支手機，可以複製貼回對話。</p>
+          <div class="question" data-q="transition"><b>從聚光演出進入幽靈追跡，感覺如何？</b><div class="choices"><button data-v="自然">自然</button><button data-v="稍有中斷">稍有中斷</button><button data-v="很跳">很跳</button></div></div>
+          <div class="question" data-q="emotion"><b>找到三個痕跡後，不公平感有變強嗎？</b><div class="choices"><button data-v="明顯變強">明顯變強</button><button data-v="增加一點">增加一點</button><button data-v="沒有">沒有</button></div></div>
+          <div class="question" data-q="continue"><b>回到辦公室後，你想繼續看事情發展嗎？</b><div class="choices"><button data-v="很想">很想</button><button data-v="普通">普通</button><button data-v="不想">不想</button></div></div>
+          <button class="copy" id="copy">複製測試結果</button><div class="copy-status" id="copyStatus"></div><button class="again" id="again">重新體驗一次</button>
+        </div>
       </section>
     </main>
   </div>
 
-  <div class="replay hidden" id="replayOverlay" role="dialog" aria-modal="true" aria-labelledby="replayTitle">
-    <div class="replay-card"><h2 id="replayTitle">殘影重組完成</h2><div class="timeline"><div class="timeline-item"><time>昨晚 20:08</time><p>小勤修正 17 筆錯位資料，版本紀錄留下她的名字。</p></div><div class="timeline-item"><time>今天 09:12</time><p>美玲說：「傳我摘要，我幫你向主管說明。」</p></div><div class="timeline-item"><time>今天 09:41</time><p>文件內容沒有再修改，封面的主責人卻變成美玲。</p></div></div><div class="impact">你沒有親眼看見整段過程，卻能從工作留下的痕跡確認：做事的人與被看見的人，已經不是同一個。</div><button id="closeReplay">結束追跡</button></div>
-  </div>
+  <section class="reconstruction hidden" id="reconstruction" role="dialog" aria-modal="true" aria-labelledby="reconTitle">
+    <div class="recon-card"><small>三個殘影已連結</small><h2 id="reconTitle">你現在知道發生了什麼</h2><div class="timeline">
+      <div class="event"><time>昨晚<br>20:08</time><p>小勤修正 17 筆錯位資料，版本紀錄留下她的名字。</p></div>
+      <div class="event"><time>今天<br>09:12</time><p>美玲說：「傳我摘要，我幫你向主管說明。」</p></div>
+      <div class="event"><time>今天<br>09:41</time><p>內容沒有新的修改，封面的主責人卻換成美玲。</p></div>
+    </div><div class="recon-impact">你先前只看見封面閃了一下。現在，版本、訊息與署名把同一件事連了起來。</div><button class="return-btn" id="returnOffice">帶著證據回到辦公室</button></div>
+  </section>
 
   <script>
     const $=id=>document.getElementById(id);
-    const modeInfo={spotlight:{code:'模式 A',title:'聚光演出',icon:'🎥',end:'鏡頭替你決定此刻該看誰。'},comic:{code:'模式 B',title:'互動分鏡',icon:'▣',end:'故事被切成明確的畫面與轉折。'},trace:{code:'模式 C',title:'幽靈追跡',icon:'🔍',end:'你透過物件痕跡，親手把因果重新接起來。'}};
-    const spotScenes=[
+    const scenes=[
       {time:'昨晚 19:42',heading:'辦公室只剩小勤',text:'她沒有對話對象，只是逐欄核對明早要交出的客戶資料。'},
-      {time:'昨晚 20:08',heading:'她找到 17 筆錯位',text:'小勤逐筆修正，重新檢查，並在版本紀錄留下自己的名字。'},
+      {time:'昨晚 20:08',heading:'她找到 17 筆錯位',text:'小勤逐筆修正、重新檢查，並在版本紀錄留下自己的名字。'},
       {time:'今天 09:12',heading:'美玲第一次進入故事',text:'「主管早上會問進度。你把摘要傳我，我幫你說明。」'},
       {time:'今天 09:26',heading:'摘要從一張桌子移到另一張',text:'小勤傳出修正版與摘要。美玲沒有參與昨晚的核對。'},
-      {time:'今天 09:41',heading:'內容沒變，被看見的名字變了',text:'美玲沒有修改任何數據，只把封面上的主責改成自己。'}
+      {time:'今天 09:41',heading:'封面閃了一下',text:'美玲打開文件，游標停在主責欄位。你看不清楚她最後輸入了什麼。'},
+      {time:'今天 10:03',heading:'證據沒有立刻改變現實',text:'小勤收到通知：「明早由美玲代表說明，你協助補齊資料。」她停了幾秒，又打開原始檔。'}
     ];
-    const comicPanels=[
-      {heading:'最後一盞燈',text:'19:42，辦公室只剩小勤。',art:'<span class="comic-clock">19:42</span><div class="desk"><span class="desk-name">小勤</span></div><span class="comic-char kin">👩🏻‍💻</span><span class="comic-sfx">喀、喀</span>'},
-      {heading:'留下名字的修正',text:'她改好 17 筆錯位資料，也留下完整版本紀錄。',art:'<span class="comic-clock">20:08</span><div class="comic-sheet">客戶資料修正完成<br>修正筆數：17<br><b>修正者：小勤</b> ✓</div>'},
-      {heading:'第二個人進場',text:'「把摘要傳我，我幫你向主管說明。」',art:'<span class="comic-clock">09:12</span><span class="comic-char kin">👩🏻‍💻</span><span class="comic-char mei">👩🏻‍💼</span><div class="comic-bubble" style="right:24%;top:13%">傳我摘要，我幫你說明。</div>'},
-      {heading:'文件被帶走',text:'小勤把修正版和摘要交給美玲。',art:'<span class="comic-clock">09:26</span><span class="comic-char kin" style="left:18%">👩🏻‍💻</span><span class="comic-char mei" style="right:12%">👩🏻‍💼</span><span class="comic-sfx" style="right:43%;top:45%">📄 →</span>'},
-      {heading:'只改了一行字',text:'資料內容沒有變，封面的主責人卻變成美玲。',art:'<span class="comic-clock">09:41</span><div class="comic-sheet"><span class="strike">資料修正：小勤</span><br><b class="new-owner">提案主責：美玲</b></div><span class="comic-sfx">喀</span>'}
-    ];
-    const clueData={version:{kicker:'痕跡 1｜版本紀錄',heading:'昨晚 20:08，由小勤儲存',text:'17 筆資料修正都有時間與作者紀錄。'},message:{kicker:'痕跡 2｜內部訊息',heading:'「傳我摘要，我幫你說明」',text:'美玲取得的是已完成的修正版與摘要。'},credit:{kicker:'痕跡 3｜提案封面',heading:'內容未變，主責人變了',text:'資料沒有新的修改，封面卻只留下美玲的名字。'}};
-    let currentMode='',spotIndex=0,comicIndex=0,found=new Set();
-    const completed=new Set(JSON.parse(localStorage.getItem('ghostPresentationCompleted')||'[]'));
-    const answers=JSON.parse(localStorage.getItem('ghostPresentationAnswers')||'{}');
-
-    function showMenu(){
-      $('experience').classList.add('hidden');$('menu').classList.remove('hidden');$('modeEnd').classList.add('hidden');$('replayOverlay').classList.add('hidden');
-      document.body.style.overflow='';renderMenu();window.scrollTo({top:0,behavior:'smooth'});
+    const clues={version:{k:'痕跡 1｜版本紀錄',h:'昨晚 20:08，由小勤儲存',t:'17 筆修正都有時間、內容與作者紀錄。'},message:{k:'痕跡 2｜內部訊息',h:'「傳我摘要，我幫你說明」',t:'美玲取得的是已完成的修正版與摘要。'},credit:{k:'痕跡 3｜提案封面',h:'內容未變，主責人變了',t:'資料沒有新的修改，封面卻只留下美玲的名字。'}};
+    let scene=0,found=new Set(),answers={};
+    function setJourney(){const bars=$('journey').querySelectorAll('span');bars.forEach((b,i)=>{b.className='';if(scene===4&&found.size){if(i<4)b.classList.add('on');if(i===4)b.classList.add('ghost')}else if(scene===5){if(i<4)b.classList.add('on');if(i===4)b.classList.add('ghost');if(i===5)b.classList.add('return')}else if(i<=scene)b.classList.add('on')})}
+    function renderScene(){
+      const s=scenes[scene];$('office').dataset.scene=String(scene);$('sceneTime').textContent=s.time;$('sceneHeading').textContent=s.heading;$('sceneText').textContent=s.text;$('count').textContent=(scene+1)+' / '+scenes.length;$('phaseCode').textContent=scene===5?'第三階段':'第一階段';$('phaseTitle').textContent=scene===5?'返回辦公室':'聚光觀察';
+      $('office').querySelector('.mei').classList.toggle('walk',scene===2);$('office').querySelector('.kin').classList.toggle('work',scene<2);$('next').textContent=scene===4?'跟隨異常殘影':scene===5?'完成這次測試':'繼續觀察';setJourney();
     }
-    function renderMenu(){
-      document.querySelectorAll('.mode-card').forEach(card=>{card.querySelector('.done-tag')?.remove();const key=card.dataset.mode;if(completed.has(key)){const tag=document.createElement('span');tag.className='done-tag';tag.textContent='已體驗';card.appendChild(tag)}});
-      $('compare').classList.toggle('hidden',completed.size<2);
-      document.querySelectorAll('.question').forEach(q=>q.querySelectorAll('button').forEach(b=>b.classList.toggle('selected',answers[q.dataset.question]===b.dataset.value)));
+    function begin(){scene=0;found=new Set();answers={};$('intro').classList.add('hidden');$('end').classList.add('hidden');$('play').classList.remove('hidden');$('restart').classList.remove('hidden');$('stage').classList.remove('trace-mode');$('traceUI').classList.add('hidden');$('caption').classList.remove('hidden');$('rebuild').classList.add('hidden');document.body.style.overflow='';document.querySelectorAll('.clue').forEach(b=>b.classList.remove('found'));window.scrollTo({top:0,behavior:'smooth'});renderScene()}
+    function enterTrace(){
+      found=new Set();$('stage').classList.add('trace-mode');$('traceUI').classList.remove('hidden');$('caption').classList.add('hidden');$('rebuild').classList.remove('hidden');$('rebuild').disabled=true;$('phaseCode').textContent='第二階段';$('phaseTitle').textContent='幽靈追跡';$('count').textContent='0 / 3';$('traceKicker').textContent='尚未讀取';$('traceHeading').textContent='哪個痕跡最先吸引你？';$('traceText').textContent='幽靈只能看見工作留下的殘影，不能改動角色的行為。';$('traceUI').querySelectorAll('.trace-bars span').forEach(b=>b.classList.remove('on'));setJourney();
     }
-    function startMode(mode){
-      currentMode=mode;$('menu').classList.add('hidden');$('experience').classList.remove('hidden');$('modeEnd').classList.add('hidden');
-      ['spotlight','comic','trace'].forEach(m=>$(m+'Mode').classList.toggle('hidden',m!==mode));
-      $('modeCode').textContent=modeInfo[mode].code;$('modeTitle').textContent=modeInfo[mode].title;window.scrollTo({top:0,behavior:'smooth'});
-      if(mode==='spotlight')resetSpotlight();if(mode==='comic')resetComic();if(mode==='trace')resetTrace();
+    function readClue(key,button){const d=clues[key];found.add(key);button.classList.add('found');$('traceKicker').textContent=d.k;$('traceHeading').textContent=d.h;$('traceText').textContent=d.t;$('count').textContent=found.size+' / 3';$('traceUI').querySelectorAll('.trace-bars span').forEach((b,i)=>b.classList.toggle('on',i<found.size));$('rebuild').disabled=found.size<3;setJourney()}
+    function returnOffice(){
+      $('reconstruction').classList.add('hidden');document.body.style.overflow='';$('stage').classList.remove('trace-mode');$('traceUI').classList.add('hidden');$('rebuild').classList.add('hidden');$('caption').classList.remove('hidden');scene=5;renderScene();window.scrollTo({top:0,behavior:'smooth'});
     }
-    function finishMode(){
-      completed.add(currentMode);localStorage.setItem('ghostPresentationCompleted',JSON.stringify([...completed]));
-      ['spotlight','comic','trace'].forEach(m=>$(m+'Mode').classList.add('hidden'));
-      $('sceneCount').textContent='完成';$('endIcon').textContent=modeInfo[currentMode].icon;$('endTitle').textContent=modeInfo[currentMode].title+'體驗完成';$('endText').textContent=modeInfo[currentMode].end;$('modeEnd').classList.remove('hidden');
-    }
-    function resetSpotlight(){spotIndex=0;renderSpotlight()}
-    function renderSpotlight(){
-      const s=spotScenes[spotIndex],office=$('spotOffice');office.dataset.scene=String(spotIndex);$('spotTime').textContent=s.time;$('spotHeading').textContent=s.heading;$('spotText').textContent=s.text;$('sceneCount').textContent=(spotIndex+1)+' / '+spotScenes.length;
-      office.querySelector('.mei').classList.toggle('unseen',spotIndex<2);office.querySelector('.mei').classList.toggle('walking',spotIndex===2);office.querySelector('.kin').classList.toggle('working',spotIndex<2);
-      $('spotNext').textContent=spotIndex===spotScenes.length-1?'完成這種體驗':'繼續觀察';$('spotDots').innerHTML=spotScenes.map((_,i)=>'<span class="'+(i===spotIndex?'now':'')+'"></span>').join('');
-    }
-    function resetComic(){comicIndex=0;renderComic()}
-    function renderComic(){const p=comicPanels[comicIndex];$('comicArt').innerHTML=p.art;$('panelNo').textContent='分鏡 '+(comicIndex+1)+' / '+comicPanels.length;$('panelHeading').textContent=p.heading;$('panelText').textContent=p.text;$('sceneCount').textContent=(comicIndex+1)+' / '+comicPanels.length;$('comicNext').textContent=comicIndex===comicPanels.length-1?'完成這種體驗':'翻到下一格'}
-    function resetTrace(){found=new Set();$('sceneCount').textContent='0 / 3';document.querySelectorAll('.clue').forEach(b=>b.classList.remove('found'));$('traceKicker').textContent='尚未讀取';$('traceHeading').textContent='哪一個痕跡最先吸引你？';$('traceText').textContent='點擊任一發光物件，幽靈會看見它留下的片段。';$('traceProgress').querySelectorAll('span').forEach(s=>s.classList.remove('on'));$('reconstruct').disabled=true;$('replayOverlay').classList.add('hidden')}
-    function openClue(key,button){const d=clueData[key];found.add(key);button.classList.add('found');$('traceKicker').textContent=d.kicker;$('traceHeading').textContent=d.heading;$('traceText').textContent=d.text;$('traceProgress').querySelectorAll('span').forEach((s,i)=>s.classList.toggle('on',i<found.size));$('sceneCount').textContent=found.size+' / 3';$('reconstruct').disabled=found.size<3}
-
-    document.querySelectorAll('.mode-card').forEach(b=>b.addEventListener('click',()=>startMode(b.dataset.mode)));
-    $('back').addEventListener('click',showMenu);
-    $('spotNext').addEventListener('click',()=>{if(spotIndex<spotScenes.length-1){spotIndex++;renderSpotlight()}else finishMode()});
-    $('comicNext').addEventListener('click',()=>{if(comicIndex<comicPanels.length-1){comicIndex++;renderComic()}else finishMode()});
-    document.querySelectorAll('.clue').forEach(b=>b.addEventListener('click',()=>openClue(b.dataset.clue,b)));
-    $('reconstruct').addEventListener('click',()=>{$('replayOverlay').classList.remove('hidden');document.body.style.overflow='hidden'});
-    $('closeReplay').addEventListener('click',()=>{$('replayOverlay').classList.add('hidden');document.body.style.overflow='';finishMode()});
-    $('replayMode').addEventListener('click',()=>startMode(currentMode));$('chooseAnother').addEventListener('click',showMenu);
-    document.querySelectorAll('.question button').forEach(b=>b.addEventListener('click',()=>{const q=b.closest('.question');answers[q.dataset.question]=b.dataset.value;localStorage.setItem('ghostPresentationAnswers',JSON.stringify(answers));q.querySelectorAll('button').forEach(x=>x.classList.toggle('selected',x===b));$('copyStatus').textContent=''}));
-    $('copyResult').addEventListener('click',async()=>{const labels={A:'A 聚光演出',B:'B 互動分鏡',C:'C 幽靈追跡'};const text='職場幽靈 v0.4 測試結果\n最容易抓重點：'+(labels[answers.clarity]||'尚未選擇')+'\n最容易產生情緒：'+(labels[answers.emotion]||'尚未選擇')+'\n最像職場幽靈：'+(labels[answers.identity]||'尚未選擇');try{await navigator.clipboard.writeText(text);$('copyStatus').textContent='已複製，可以直接貼回對話。'}catch(e){$('copyStatus').textContent=text}});
-    renderMenu();
+    function finish(){$('play').classList.add('hidden');$('end').classList.remove('hidden');$('restart').classList.add('hidden');window.scrollTo({top:0,behavior:'smooth'})}
+    $('start').addEventListener('click',begin);$('restart').addEventListener('click',begin);$('again').addEventListener('click',begin);
+    $('next').addEventListener('click',()=>{if(scene<4){scene++;renderScene()}else if(scene===4)enterTrace();else finish()});
+    document.querySelectorAll('.clue').forEach(b=>b.addEventListener('click',()=>readClue(b.dataset.clue,b)));
+    $('rebuild').addEventListener('click',()=>{$('reconstruction').classList.remove('hidden');document.body.style.overflow='hidden'});$('returnOffice').addEventListener('click',returnOffice);
+    document.querySelectorAll('.choices button').forEach(b=>b.addEventListener('click',()=>{const q=b.closest('.question');answers[q.dataset.q]=b.dataset.v;q.querySelectorAll('button').forEach(x=>x.classList.toggle('selected',x===b));$('copyStatus').textContent=''}));
+    $('copy').addEventListener('click',async()=>{const text='職場幽靈 v0.5 測試結果\n聚光→追跡切換：'+(answers.transition||'尚未選擇')+'\n追跡後不公平感：'+(answers.emotion||'尚未選擇')+'\n回到辦公室後：'+(answers.continue||'尚未選擇');try{await navigator.clipboard.writeText(text);$('copyStatus').textContent='已複製，可以直接貼回對話。'}catch(e){$('copyStatus').textContent=text}});
   </script>
 </body>
 </html>
